@@ -9,7 +9,7 @@ lib/libalglib.a:
 	cp alglib/cpp/src/libalglib.a lib/
 
 lib/libjson.a:
-	cd jsoncpp && /scratch0/scons/bin/scons platform=linux-gcc
+	cd jsoncpp && python2.7 ../scons/scons.py platform=linux-gcc
 	mkdir -p include/json/ lib/
 	cp jsoncpp/include/json/*.h include/json/
 	cp jsoncpp/libs/linux-gcc-*/libjson_linux-gcc-*_libmt.a lib/libjson.a

@@ -1,5 +1,10 @@
 import os
 from setuptools import setup
+import sys
+
+sys.path.append('/home/w/.local/lib/python3.8/site-packages')
+
+
 from torch.utils.cpp_extension import CppExtension, BuildExtension
 
 # Python interface
@@ -14,8 +19,8 @@ setup(
                 'pybind/bind.cpp',
             ],
             libraries=['make_pytorch','json','taucs','alglib',
-            'png','z','lapack','blas','boost_system-mt','boost_filesystem-mt','boost_thread-mt','gomp','glut','GLU','GL','glapi','GLdispatch'],
-            library_dirs=['objs','./arcsim/dependencies/lib'],
+            'png','z','lapack','blas','boost_system','boost_filesystem','boost_thread','gomp','glut','GLU','GL','glapi','GLdispatch'],
+            library_dirs=['objs','./arcsim/dependencies/lib','/usr/lib/x86_64-linux-gnu/'],
         )
     ],
     cmdclass={'build_ext': BuildExtension},

@@ -7,9 +7,9 @@
 CXX := g++
 
 # PYTHON Header path
-PYTHON_HEADER_DIR := $(shell python -c 'from distutils.sysconfig import get_python_inc; print(get_python_inc())')
-PYTORCH_INCLUDES := $(shell python -c 'from torch.utils.cpp_extension import include_paths; [print(p) for p in include_paths()]')
-PYTORCH_LIBRARIES := $(shell python -c 'from torch.utils.cpp_extension import library_paths; [print(p) for p in library_paths()]')
+PYTHON_HEADER_DIR := $(shell python3 -c 'from distutils.sysconfig import get_python_inc; print(get_python_inc())')
+PYTORCH_INCLUDES := $(shell python3 -c 'from torch.utils.cpp_extension import include_paths; [print(p) for p in include_paths()]')
+PYTORCH_LIBRARIES := $(shell python3 -c 'from torch.utils.cpp_extension import library_paths; [print(p) for p in library_paths()]')
 
 # CUDA ROOT DIR that contains bin/ lib64/ and include/
 # CUDA_DIR := /usr/local/cuda
@@ -59,10 +59,10 @@ CXXFLAGS += -MMD -MP
 # Complete build flags.
 COMMON_FLAGS += $(foreach includedir,$(INCLUDE_DIRS),-I$(includedir)) \
 	     -DTORCH_API_INCLUDE_EXTENSION_H -D_GLIBCXX_USE_CXX11_ABI=0
-CXXFLAGS += -pthread -fPIC -fwrapv -std=c++11 $(COMMON_FLAGS) $(WARNINGS)
+CXXFLAGS += -pthread -fPIC -fwrapv -std=c++14 $(COMMON_FLAGS) $(WARNINGS)
 
 all: $(STATIC_LIB)
-	python setup.py install --force
+	python3 setup.py install --force
 
 $(OBJ_DIR):
 	@ mkdir -p $@
