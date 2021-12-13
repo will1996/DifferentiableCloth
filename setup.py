@@ -2,8 +2,6 @@ import os
 from setuptools import setup
 import sys
 
-sys.path.append('/home/w/.local/lib/python3.8/site-packages')
-
 
 from torch.utils.cpp_extension import CppExtension, BuildExtension
 
@@ -14,7 +12,7 @@ setup(
     ext_modules=[
         CppExtension(
             name='arcsim',
-            include_dirs=['./arcsim/src/','./arcsim/dependencies/include'],
+            include_dirs=[os.path.join(cwd,'arcsim/src/'),os.path.join(cwd,'arcsim/dependencies/include')],
             sources=[
                 'pybind/bind.cpp',
             ],
