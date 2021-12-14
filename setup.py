@@ -4,7 +4,7 @@ import sys
 
 
 from torch.utils.cpp_extension import CppExtension, BuildExtension
-
+cwd = os.getcwd()
 # Python interface
 setup(
     name='arcsim',
@@ -18,7 +18,7 @@ setup(
             ],
             libraries=['make_pytorch','json','taucs','alglib',
             'png','z','lapack','blas','boost_system','boost_filesystem','boost_thread','gomp','glut','GLU','GL','glapi','GLdispatch'],
-            library_dirs=['objs','./arcsim/dependencies/lib','/usr/lib/x86_64-linux-gnu/'],
+            library_dirs=[os.path.join('objs'),os.path.join(cwd,'arcsim/dependencies/lib'),'/usr/lib/x86_64-linux-gnu/'],
         )
     ],
     cmdclass={'build_ext': BuildExtension},
