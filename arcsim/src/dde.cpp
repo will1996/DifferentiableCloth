@@ -101,12 +101,12 @@ Tensor bending_stiffness (const Edge *edge, const BendingData &data0, const Bend
     return min(actual_ke0, actual_ke1);
 }
 
-Tensor batch_bending_stiffness(Tensor curv, Tensor bang, Tensor bend) {
+    Tensor batch_bending_stiffness(Tensor curv, Tensor bang, Tensor bend) {
     Tensor value = clamp(curv-1, -1, 1); // because samples are per 0.05 cm^-1 = 5 m^-1
     bend = bend.squeeze(0);
     //0
-    Tensor    bias_angle0=bang[0];//(atan2(du0[1], du0[0]))*(4/M_PI);
-    Tensor grid0 = stack({value, bias_angle0}, 1).reshape({1,1,-1,2});
+    Tensor bias_angle0=bang[0];//(atan2(du0[1], du0[0]))*(4/M_PI);
+    Tensor grid0 = stack(at::TensorList({value, bias_angle0}), 1).reshape({1,1,-1,2});
     Tensor actual_ke0 = relu(grid_sampler(bend, grid0, 0, 2,align_corners).squeeze());
     //1
     Tensor    bias_angle1=bang[1];//(atan2(du1[1], du1[0]))*(4/M_PI);
