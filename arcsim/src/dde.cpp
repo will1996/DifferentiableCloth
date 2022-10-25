@@ -58,7 +58,6 @@ void evaluate_stretching_samples (StretchingSamples &samples,
                         v1=1;v0=0;
                       }
                     double angle_weight = fabs(atan2(v1,v0)/M_PI)*8;
-                            tan2(v1,v0)/M_PI)*8;
                     double strain_weight = (sqrt(w)-1)*6;
                     inpgrid.push_back(angle_weight/2-1);
                     inpgrid.push_back(strain_weight*2-1);
